@@ -5,26 +5,22 @@ import sqlite3
 def criar_banco_de_dados():
     global conn
     global cursor
-    conn = sqlite3.connect('sistema_de_login.db')  # vai criar ou abrir se exitir com o nome
+    conn = sqlite3.connect('sistema_de_login.sql')  # vai criar ou abrir se exitir com o nome
     cursor = conn.cursor()
     print("Banco de dados conectado")
     
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS Users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user TEXT(255) NOT NULL,
-        password TEXT(255) NOT NULL
+        user VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL
     )
     """)
     conn.commit()
     print("Tabela criada")
 
-# Inicializar o banco de dados e criar a tabela de usuários
+# Inicializar o banco de dados e criar a tabela de usuï¿½rios
 criar_banco_de_dados()
-
-
-
-
 
 #config da gui
 janela = tk.Tk()
@@ -51,7 +47,7 @@ def sistema_de_login():
     #inserir na tabela os dados gerados
     
     def inserir_usuario(usuario, senha):
-        cursor.execute("INSERT INTO Users (user, password) VALUES ( , , )", (usuario, senha))
+        cursor.execute("INSERT INTO Users (user, password) VALUES (?, ?)", (usuario, senha))
         conn.commit()
         print("Dados inseridos")
 
